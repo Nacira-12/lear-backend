@@ -9,21 +9,25 @@ const SuggestionSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  departement: {
+    type: String,
+    default: ''
+  },
+  titreIdee: {
+    type: String,
+    default: ''
+  },
   probleme: {
     type: String,
     required: true
   },
   frequence: {
     type: String,
-    required: true
-  },
-  categorie: {
-    type: String,
-    required: true
-  },
-  consequences: {
-    type: String,
     default: ''
+  },
+  zonesImpact: {
+    type: [String],
+    default: []
   },
   idee: {
     type: String,
@@ -33,9 +37,9 @@ const SuggestionSchema = new mongoose.Schema({
     type: String,
     default: ''
   },
-  impact: {
-    type: String,
-    required: true
+  kpisImpactes: {
+    type: [String],
+    default: []
   },
   dateCreation: {
     type: Date,
