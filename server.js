@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
+const path = require('path');
 const connectDB = require('./config/db');
 
 // Charger les variables d'environnement
@@ -12,7 +13,7 @@ connectDB();
 // Créer l'application Express
 const app = express();
 
-// Middleware CORS - Autorise toutes les origines
+// Middleware CORS
 app.use(cors({
   origin: '*',
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
@@ -21,12 +22,15 @@ app.use(cors({
 
 app.use(express.json());
 
-// Routes
+// ✅ Servir les fichiers Frontend statiques
+app.use(express.static(path.join(__dirname, '../Frontend')));
+
+// Routes API
 app.use('/api/suggestion', require('./routes/suggestion'));
 app.use('/api/qrcode', require('./routes/qrcode'));
 
 // Route de test
-app.get('/', (req, res) => {
+app.get('/api', (req, res) => {
   res.json({ 
     message: '✅ API Lear Corporation fonctionne !',
     version: '1.0.0',
